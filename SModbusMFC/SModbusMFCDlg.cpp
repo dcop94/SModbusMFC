@@ -65,8 +65,43 @@ BEGIN_MESSAGE_MAP(CSModbusMFCDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_COMMAND(ID_FILE_OPEN, &CSModbusMFCDlg::OnFileOpen)
+	ON_COMMAND(ID_FILE_SAVE, &CSModbusMFCDlg::OnFileSave)
+	ON_COMMAND(ID_FILE_SAVE_AS, &CSModbusMFCDlg::OnFileSaveAs)
+	ON_COMMAND(ID_CONN_SINGLE, &CSModbusMFCDlg::OnConnSingle)
+	ON_COMMAND(ID_CONN_MULTI, &CSModbusMFCDlg::OnConnMulti)
+	ON_COMMAND(ID_SETUP_OPTIONS, &CSModbusMFCDlg::OnSetupOptions)
 END_MESSAGE_MAP()
 
+void CSModbusMFCDlg::OnFileOpen()
+{
+	AfxMessageBox(L"열기");
+}
+
+void CSModbusMFCDlg::OnFileSave()
+{
+	AfxMessageBox(L"저장");
+}
+
+void CSModbusMFCDlg::OnFileSaveAs()
+{
+	AfxMessageBox(L"다른 이름으로 저장");
+}
+
+void CSModbusMFCDlg::OnConnSingle()
+{
+	AfxMessageBox(L"단독 연결");
+}
+
+void CSModbusMFCDlg::OnConnMulti()
+{
+	AfxMessageBox(L"다중 연결");
+}
+
+void CSModbusMFCDlg::OnSetupOptions()
+{
+	AfxMessageBox(L"옵션");
+}
 
 // CSModbusMFCDlg 메시지 처리기
 

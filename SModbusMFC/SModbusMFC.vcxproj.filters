@@ -68,18 +68,6 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="libmodbus\modbus.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="libmodbus\modbus-data.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="libmodbus\modbus-rtu.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="libmodbus\modbus-tcp.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SModbusMFC.rc">

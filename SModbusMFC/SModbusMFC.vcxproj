@@ -201,10 +201,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="libmodbus\modbus-data.c" />
-    <ClCompile Include="libmodbus\modbus-rtu.c" />
-    <ClCompile Include="libmodbus\modbus-tcp.c" />
-    <ClCompile Include="libmodbus\modbus.c" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -223,6 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\SModbusMFC.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\libmodbus_static\libmodbus_static.vcxproj">
+      <Project>{8c91493a-c47c-42ab-b5c3-f085d15d4631}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

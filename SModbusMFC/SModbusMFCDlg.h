@@ -30,5 +30,15 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+
+	afx_msg void OnFileOpen();
+	afx_msg void OnFileSave();
+	afx_msg void OnFileSaveAs();
+	afx_msg void OnConnSingle();
+	afx_msg void OnConnMulti();
+	afx_msg void OnSetupOptions();
+
 	DECLARE_MESSAGE_MAP()
+
+	
 };
