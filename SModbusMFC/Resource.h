@@ -11,6 +11,7 @@
 #define IDD_LEFT_PANE                   131
 #define IDD_RIGHT_TOP_PANE              133
 #define IDD_RIGHT_BOTTOM_PANE           134
+#define IDC_LIST_LOG                    1000
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -20,14 +21,29 @@
 #define ID_CONN_SINGLE                  32777
 #define ID_CONN_MULTI                   32778
 #define ID_SETUP_OPTIONS                32779
+#define ID_32780                        32780
+#define ID_WINDOW_TILE                  32781
+#define ID_32782                        32782
+#define ID_32783                        32783
+#define ID_32784                        32784
+#define ID_32785                        32785
+#define ID_32786                        32786
+#define ID_32787                        32787
+#define ID_32788                        32788
+#define ID_32789                        32789
+#define ID_WINDOW_TILE_H                32790
+#define ID_WINDOW_TILE_V                32791
+#define ID_WINDOW_CLOSE                 32792
+#define ID_WINDOW_CLOSE_ALL             32793
+#define ID_WINDOW_NEXT                  32794
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        137
-#define _APS_NEXT_COMMAND_VALUE         32780
-#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_COMMAND_VALUE         32795
+#define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           113
 #endif
 #endif

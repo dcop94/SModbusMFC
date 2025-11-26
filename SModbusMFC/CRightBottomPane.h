@@ -4,21 +4,20 @@
 
 // CRightBottomPane 대화 상자
 
-class CRightBottomPane : public CDialogEx
-{
-	DECLARE_DYNAMIC(CRightBottomPane)
-
+class CRightBottomPane : public CDialogEx {
+    DECLARE_DYNAMIC(CRightBottomPane)
 public:
-	CRightBottomPane(CWnd* pParent = nullptr);   // 표준 생성자입니다.
-	virtual ~CRightBottomPane();
-
-// 대화 상자 데이터입니다.
+    CRightBottomPane(CWnd* pParent = nullptr) : CDialogEx(IDD_RIGHT_BOTTOM_PANE, pParent) {}
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_RIGHT_BOTTOM_PANE };
+    enum { IDD = IDD_RIGHT_BOTTOM_PANE };
 #endif
-
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
-
-	DECLARE_MESSAGE_MAP()
+    virtual void DoDataExchange(CDataExchange* pDX) { CDialogEx::DoDataExchange(pDX); }
+    virtual BOOL OnInitDialog();
+    afx_msg void OnSize(UINT nType, int cx, int cy);
+    DECLARE_MESSAGE_MAP()
+private:
+    CListCtrl m_listLog;
+    void InitList();
+    void Layout(int cx, int cy);
 };

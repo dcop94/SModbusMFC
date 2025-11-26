@@ -64,6 +64,18 @@ protected:
 	afx_msg void OnConnMulti();
 	afx_msg void OnSetupOptions();
 
+	afx_msg void OnWindowNew();
+	afx_msg void OnWindowTile();
+
+	// 메뉴 핸들러 선언
+	afx_msg void OnWindowCascade();
+	afx_msg void OnWindowTileH();
+	afx_msg void OnWindowTileV();
+	afx_msg void OnWindowClose();
+	afx_msg void OnWindowCloseAll();
+	afx_msg void OnWindowNext();
+
+
 	// 배치함수
 	void DoLayout();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
