@@ -185,6 +185,9 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CLeftPane.h" />
+    <ClInclude Include="CRightBottomPane.h" />
+    <ClInclude Include="CRightTopPane.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="libmodbus\config.h" />
     <ClInclude Include="libmodbus\modbus-private.h" />
@@ -198,9 +201,13 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SModbusMFC.h" />
     <ClInclude Include="SModbusMFCDlg.h" />
+    <ClInclude Include="SplitterBar.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLeftPane.cpp" />
+    <ClCompile Include="CRightBottomPane.cpp" />
+    <ClCompile Include="CRightTopPane.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -209,6 +216,7 @@
     </ClCompile>
     <ClCompile Include="SModbusMFC.cpp" />
     <ClCompile Include="SModbusMFCDlg.cpp" />
+    <ClCompile Include="SplitterBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="modbus.rc" />

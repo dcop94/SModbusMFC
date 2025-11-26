@@ -8,6 +8,9 @@
 #define IDD_SMODBUSMFC_DIALOG           102
 #define IDR_MAINFRAME                   128
 #define IDR_MENU1                       129
+#define IDD_LEFT_PANE                   131
+#define IDD_RIGHT_TOP_PANE              133
+#define IDD_RIGHT_BOTTOM_PANE           134
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -22,9 +25,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        131
+#define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32780
 #define _APS_NEXT_CONTROL_VALUE         1000
-#define _APS_NEXT_SYMED_VALUE           101
+#define _APS_NEXT_SYMED_VALUE           113
 #endif
 #endif

@@ -71,6 +71,7 @@ BEGIN_MESSAGE_MAP(CSModbusMFCDlg, CDialogEx)
 	ON_COMMAND(ID_CONN_SINGLE, &CSModbusMFCDlg::OnConnSingle)
 	ON_COMMAND(ID_CONN_MULTI, &CSModbusMFCDlg::OnConnMulti)
 	ON_COMMAND(ID_SETUP_OPTIONS, &CSModbusMFCDlg::OnSetupOptions)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 void CSModbusMFCDlg::OnFileOpen()
@@ -140,6 +141,40 @@ BOOL CSModbusMFCDlg::OnInitDialog()
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
 
+	const int W = 1200, H = 800;
+	CRect r; GetWindowRect(&r);
+	MoveWindow(r.left, r.top, W, H, TRUE);
+
+	// 자식 대화상자 3개 생성 및 표시
+	m_left.Create(IDD_LEFT_PANE, this);
+	m_top.Create(IDD_RIGHT_TOP_PANE, this);
+	m_bottom.Create(IDD_RIGHT_BOTTOM_PANE, this);
+	m_left.ShowWindow(SW_SHOW);
+	m_top.ShowWindow(SW_SHOW);
+	m_bottom.ShowWindow(SW_SHOW);
+
+	// 스플리터 2개 생성 
+	m_vsplit.Create(CSplitterBar::VERT, this, 30001); // 좌우 분할
+	m_hsplit.Create(CSplitterBar::HORZ, this, 30002); // 우측 상하 분할
+	
+	// 최초 비율 세팅
+	CRect rc; GetClientRect(&rc);
+	double vPct = (double)m_leftWidthPx / max(1, rc.Width()); // 좌폭 비율
+	double hPct = 1.0 - (double)m_bottomHeightPx / max(1, rc.Height()); // 상단 비율 
+	
+	// 클램프 + 스냅
+	vPct = max(0.1, min(0.9, vPct));
+	hPct = max(0.1, min(0.9, hPct));
+	m_vsplit.SetDefaultPercent(vPct);
+	m_hsplit.SetDefaultPercent(hPct);
+	m_vsplit.SetPercent(vPct);
+	m_hsplit.SetPercent(hPct);
+	
+	// 최초 레이아웃 배치
+	DoLayout();
+
+	
+
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -190,5 +225,72 @@ void CSModbusMFCDlg::OnPaint()
 HCURSOR CSModbusMFCDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
+}
+
+void CSModbusMFCDlg::DoLayout()
+{
+	if (!m_left.m_hWnd) return;
+
+	CRect rc; GetClientRect(&rc);
+
+	// 여백과 스플리터 두께
+	const int PAD = 4; // 창 외곽 여백
+	const int SPL = 6; // 스플리터 두께
+
+	// 현재 비율을 픽셀로 변환
+	int leftW = (int)(rc.Width() * m_vsplit.GetPercent());
+	int topH = (int)(rc.Height() * m_hsplit.GetPercent());
+
+	// 최소 크기 보정 (왼쪽, 오른쪽-상단, 하단)
+	leftW = max(leftW, m_minLeftPx);
+
+	// 우측 사각형
+	CRect rcLeft(rc.left + PAD, rc.top + PAD,
+		rc.left + leftW - PAD, rc.bottom - PAD);
+	CRect rcV(rcLeft.right, rc.top + PAD,
+		rcLeft.right + SPL, rc.bottom - PAD);
+	CRect rcRight(rcV.right + PAD, rc.top + PAD,
+		rc.right - PAD, rc.bottom - PAD);
+
+	// 상단 높이 보정: 상단은 최소 m_minRightTopPx, 하단은 최소 m_minBottomPx
+	int rightHeight = rcRight.Height();
+	int bottomH = rightHeight - topH - PAD - SPL;
+	if (topH < m_minRightTopPx) 
+	{
+		topH = m_minRightTopPx;
+		bottomH = rightHeight - topH - PAD - SPL;
+	}
+	if (bottomH < m_minBottomPx) 
+	{
+		bottomH = m_minBottomPx;
+		topH = rightHeight - bottomH - PAD - SPL;
+		topH = max(topH, m_minRightTopPx);
+	}
+
+	// 실제 배치
+	CRect rcTop(rcRight.left, rcRight.top,
+		rcRight.right, rcRight.top + topH);
+	CRect rcH(rcRight.left, rcTop.bottom,
+		rcRight.right, rcTop.bottom + SPL);
+	CRect rcBot(rcRight.left, rcH.bottom,
+		rcRight.right, rcRight.bottom);
+
+	m_left.MoveWindow(rcLeft);
+	m_top.MoveWindow(rcTop);
+	m_bottom.MoveWindow(rcBot);
+	m_vsplit.MoveWindow(rcV);
+	m_hsplit.MoveWindow(rcH);
+
+	// ❸ 현재 픽셀 값을 갱신(사용자 드래그 후에도 “고정폭/고정높이 느낌” 유지에 활용 가능)
+	m_leftWidthPx = rcLeft.Width();
+	m_bottomHeightPx = rcBot.Height();
+
+
+}
+
+void CSModbusMFCDlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialogEx::OnSize(nType, cx, cy);
+	DoLayout();
 }
 
