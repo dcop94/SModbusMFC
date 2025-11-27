@@ -3,10 +3,14 @@
 //
 
 #pragma once
+
 #include "CLeftPane.h"
 #include "CRightTopPane.h"
 #include "CRightBottomPane.h"
 #include "SplitterBar.h"
+#include "CommonTypes.h"
+
+
 
 // CSModbusMFCDlg 대화 상자
 class CSModbusMFCDlg : public CDialogEx
@@ -14,6 +18,8 @@ class CSModbusMFCDlg : public CDialogEx
 // 생성입니다.
 public:
 	CSModbusMFCDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
+
+	PollOptions m_opts;
 
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
@@ -75,6 +81,7 @@ protected:
 	afx_msg void OnWindowCloseAll();
 	afx_msg void OnWindowNext();
 
+	afx_msg LRESULT OnAppendLog(WPARAM, LPARAM);
 
 	// 배치함수
 	void DoLayout();
@@ -83,5 +90,6 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
-	
+private:
+	ConnParams m_conn;
 };

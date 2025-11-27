@@ -7,6 +7,9 @@
 #include "SModbusMFC.h"
 #include "SModbusMFCDlg.h"
 #include "afxdialogex.h"
+#include "CConnDlg.h"
+#include "CommonTypes.h"
+#include "COptionsDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -75,11 +78,13 @@ BEGIN_MESSAGE_MAP(CSModbusMFCDlg, CDialogEx)
 	ON_COMMAND(ID_WINDOW_NEW, &CSModbusMFCDlg::OnWindowNew)
 	ON_COMMAND(ID_WINDOW_TILE, &CSModbusMFCDlg::OnWindowTile)
 	ON_COMMAND(ID_WINDOW_CASCADE, &CSModbusMFCDlg::OnWindowCascade)
-	ON_COMMAND(id_window_tile &CSModbusMFCDlg::OnWindowTileH)
+	ON_COMMAND(ID_WINDOW_TILE_H, &CSModbusMFCDlg::OnWindowTileH)
 	ON_COMMAND(ID_WINDOW_TILE_V, &CSModbusMFCDlg::OnWindowTileV)
 	ON_COMMAND(ID_WINDOW_CLOSE, &CSModbusMFCDlg::OnWindowClose)
 	ON_COMMAND(ID_WINDOW_CLOSE_ALL, &CSModbusMFCDlg::OnWindowCloseAll)
 	ON_COMMAND(ID_WINDOW_NEXT, &CSModbusMFCDlg::OnWindowNext)
+
+	ON_MESSAGE(WM_APPEND_LOG, &CSModbusMFCDlg::OnAppendLog)
 
 	ON_WM_SIZE()
 END_MESSAGE_MAP()
@@ -101,7 +106,12 @@ void CSModbusMFCDlg::OnFileSaveAs()
 
 void CSModbusMFCDlg::OnConnSingle()
 {
-	AfxMessageBox(L"단독 연결");
+	CConnDlg dlg; 
+	dlg.params = m_conn;
+	if (dlg.DoModal() == IDOK) {
+		m_conn = dlg.params;
+		m_top.ApplyConnectionToActive(m_conn); // 활성 문서창으로 전달
+	}
 }
 
 void CSModbusMFCDlg::OnConnMulti()
@@ -111,7 +121,13 @@ void CSModbusMFCDlg::OnConnMulti()
 
 void CSModbusMFCDlg::OnSetupOptions()
 {
-	AfxMessageBox(L"옵션");
+	COptionsDlg dlg;
+	dlg.opts = m_opts;            // 기존값 채우기
+	if (dlg.DoModal() == IDOK) {
+		m_opts = dlg.opts;        // 저장
+		// 활성 문서에 즉시 반영
+		m_top.ApplyOptionsToActive(m_opts);
+	}
 }
 
 // CSModbusMFCDlg 메시지 처리기
@@ -324,3 +340,19 @@ void CSModbusMFCDlg::OnWindowNext()
 { 
 	m_top.PostMessage(WM_TOPPANE_ACTIVATE_NEXT, 0, 0); 
 }
+
+LRESULT CSModbusMFCDlg::OnAppendLog(WPARAM wParam, LPARAM lParam)
+{
+	// wParam/lParam에 포인터가 들어옵니다: new CString[4]{time,dir,lenS,preview}
+	CString* p = reinterpret_cast<CString*>(wParam);
+	if (p) {
+		int len = _wtoi(p[2]);               // len 문자열을 int로 변환
+		m_bottom.AddLog(p[0], p[1], len, p[3]);
+		delete[] p;
+	}
+	return 0;
+}
+
+
+
+

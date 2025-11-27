@@ -192,7 +192,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CConnDlg.h" />
     <ClInclude Include="CLeftPane.h" />
+    <ClInclude Include="CommonTypes.h" />
+    <ClInclude Include="COptionsDlg.h" />
     <ClInclude Include="CRightBottomPane.h" />
     <ClInclude Include="CRightTopPane.h" />
     <ClInclude Include="framework.h" />
@@ -211,9 +214,12 @@
     <ClInclude Include="SModbusMFCDlg.h" />
     <ClInclude Include="SplitterBar.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TopPaneMsgs.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CConnDlg.cpp" />
     <ClCompile Include="CLeftPane.cpp" />
+    <ClCompile Include="COptionsDlg.cpp" />
     <ClCompile Include="CRightBottomPane.cpp" />
     <ClCompile Include="CRightTopPane.cpp" />
     <ClCompile Include="ModbusDocWnd.cpp" />

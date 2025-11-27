@@ -72,6 +72,18 @@
     <ClInclude Include="ModbusDocWnd.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="TopPaneMsgs.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonTypes.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CConnDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="COptionsDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SModbusMFC.cpp">
@@ -96,6 +108,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ModbusDocWnd.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CConnDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="COptionsDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

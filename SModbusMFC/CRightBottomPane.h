@@ -8,6 +8,8 @@ class CRightBottomPane : public CDialogEx {
     DECLARE_DYNAMIC(CRightBottomPane)
 public:
     CRightBottomPane(CWnd* pParent = nullptr) : CDialogEx(IDD_RIGHT_BOTTOM_PANE, pParent) {}
+    
+    void AddLog(const CString& time, const CString& dir, int len, const CString& preview);
 #ifdef AFX_DESIGN_TIME
     enum { IDD = IDD_RIGHT_BOTTOM_PANE };
 #endif

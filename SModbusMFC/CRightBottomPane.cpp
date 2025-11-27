@@ -23,6 +23,11 @@ BOOL CRightBottomPane::OnInitDialog()
     m_listLog.SetExtendedStyle(m_listLog.GetExtendedStyle()
         | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES | LVS_EX_DOUBLEBUFFER | LVS_EX_HEADERDRAGDROP);
 
+    m_listLog.InsertColumn(0, L"Time", LVCFMT_LEFT, 120);
+    m_listLog.InsertColumn(1, L"Dir", LVCFMT_LEFT, 60);
+    m_listLog.InsertColumn(2, L"Len", LVCFMT_RIGHT, 60);
+    m_listLog.InsertColumn(3, L"Preview", LVCFMT_LEFT, 500);
+
     InitList();
     return TRUE;
 }
@@ -50,6 +55,18 @@ void CRightBottomPane::OnSize(UINT nType, int cx, int cy)
     CDialogEx::OnSize(nType, cx, cy);
     Layout(cx, cy);
 }
+
+void CRightBottomPane::AddLog(const CString& time, const CString& dir, int len, const CString& preview)
+{
+    int idx = m_listLog.InsertItem(m_listLog.GetItemCount(), time);
+    m_listLog.SetItemText(idx, 1, dir);
+
+    CString sLen; sLen.Format(L"%d", len);
+    m_listLog.SetItemText(idx, 2, sLen);
+    m_listLog.SetItemText(idx, 3, preview);
+    m_listLog.EnsureVisible(idx, FALSE);
+}
+
 
 
 // CRightBottomPane 메시지 처리기
