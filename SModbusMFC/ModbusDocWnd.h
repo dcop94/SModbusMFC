@@ -36,7 +36,7 @@ protected:
     afx_msg void OnClose();  // X 버튼
 
     afx_msg LRESULT OnUpdateRow(WPARAM w, LPARAM l); // UI 갱신
-    afx_msg void OnDestory();
+    afx_msg void OnDestroy();
 
     afx_msg void OnTimer(UINT_PTR id);
 
